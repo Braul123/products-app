@@ -12,9 +12,16 @@ export const productsSlice = createSlice(
             saveAllProducts: (state, actions) => {
                 state.products = actions.payload;
             },
+            saveNewProduct: (state, actions) => {
+                let products: any = state.products;
+                const _newProduct = actions.payload;
+                console.log('PRODUCTOS EN STAND');
+                products.unshift(_newProduct);
+                
+            }
         }
     }
 )
 
-export const { saveAllProducts } = productsSlice.actions;
+export const { saveAllProducts, saveNewProduct } = productsSlice.actions;
 export default productsSlice.reducer;

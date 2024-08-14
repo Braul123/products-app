@@ -1,5 +1,4 @@
 
-import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import './InputPrimary.css'
 import { useColors } from '../../../services/utils/colors';
