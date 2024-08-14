@@ -7,7 +7,7 @@ import RouterApp from './components/router/RouterApp';
 export default function App() {
   
   return (
-    <div style={{minHeight: '100vh', height: '100vh'}}>
+    <div style={{minHeight: '100vh', height: '100vh', background: 'gray'}}>
       <BrowserRouter>
         <RouterApp />
       </BrowserRouter>
