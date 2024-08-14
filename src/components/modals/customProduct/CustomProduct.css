@@ -1,0 +1,49 @@
+
+
+.titleModal {
+    font-size: 1.2rem;
+    font-weight: 600
+}
+
+.contentForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.containerImage {
+    display: flex;
+}
+
+.contentImage {
+    width: 60%;
+    background-color: rgba(128, 128, 128, 0.084);
+    min-height: 100px;
+    border-radius: 8px;
+    border: 2px solid;
+    border-style: dashed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.titleContentImage {
+    font-size: 4rem;
+    font-weight: 500;
+    line-height: 16px;
+    text-align: center;
+}
+
+.contentInfo {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.textInfo {
+    font-size: .7rem;
+    text-align: center;
+}

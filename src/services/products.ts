@@ -15,7 +15,24 @@ export function fetchNewProductDefault() {
             name: `Nuevo producto ${uniqueid}`,
             description: "Descubre la excelencia en cada detalle con nuestro innovador producto. Diseñado para satisfacer tus necesidades y elevar tu experiencia, este artículo combina calidad, funcionalidad y estilo. Fabricado con materiales de primera, garantiza durabilidad y un rendimiento excepcional. Su diseño ergonómico y moderno se adapta perfectamente a cualquier entorno, haciendo de él una opción ideal para el uso diario.",
             image: "",
-            price: 200000
+            price: 200000,
+            category: "general"
+        }
+        resolve(newProduct);
+    })
+}
+
+/**
+ * @function fetchSaveNewProduct
+ * @description Crea un producto y retorna el resultado
+ */
+
+export function fetchSaveNewProduct(data: Product) {
+    return new Promise(async (resolve) => {
+        const uniqueid = JSON.stringify(Math.random()).slice(2,6);
+        const newProduct: Product = {
+            id: uniqueid,
+            ...data
         }
         resolve(newProduct);
     })

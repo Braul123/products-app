@@ -20,13 +20,19 @@ export default function ButtonPrimary(data: PropsButtonPrimary) {
     const isDarkMode = useSelector((state: any) => state.colorSystemSlice.useColorScheme) === "dark";
     const colorsCustom = useColors();
 
+    // Prepara los estilos principales del botón
+    const buttonStyle = {
+        ...(data.status === "enabled" && !data.progress 
+          ? colorsCustom.enabledMode 
+          : isDarkMode 
+            ? colorsCustom.disabledDarkMode 
+            : colorsCustom.disableLightMode),
+        ...data.style,
+      };
+
     return (
         <button
-            style={data.status === "enabled" && !data.progress ?
-                colorsCustom.enabledMode :
-                isDarkMode ? colorsCustom.disabledDarkMode :
-                    colorsCustom.disableLightMode
-            }
+            style={buttonStyle}
             className='button'
             onClick={data.status === 'enabled' ? data.onClick : null}>
             <span className='titleButton'

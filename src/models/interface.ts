@@ -7,7 +7,8 @@ export interface Product {
     description: string,
     price: number,
     image: any,
-    id: string
+    id?: string,
+    category: string
 }
 
 /**
@@ -18,7 +19,7 @@ export interface PropsInputPrimary {
     setValue: any
     placeholder: string
     disable?: boolean
-    type?: "text" | "password" | "email"
+    type?: "text" | "password" | "email" | "number"
     style?: any
 };
 

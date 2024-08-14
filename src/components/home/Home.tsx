@@ -8,6 +8,7 @@ import { useColors } from '../../services/utils/colors';
 import { FaShoppingCart } from "react-icons/fa";
 import { fetchNewProductDefault } from '../../services/products';
 import { saveNewProduct } from '../../interface/state/slices/productsSlice';
+import CustomProduct from '../modals/customProduct/CustomProduct';
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -26,7 +27,6 @@ export default function Home() {
     // Agrega un nuevo producto
     const addNewProduct = () => {
         fetchNewProductDefault().then((result: any) => {
-            console.log('PRODUCTO AGREGADO', result);
             dispatch(saveNewProduct(result));
         }, err => {
             console.error('ERROR AGREGANDO PRODCUTO', err);
@@ -46,7 +46,6 @@ export default function Home() {
             title="Primario"
             onClick={() => {console.log('CLICK BUTTON PRIMARY')}}/>
 
-
             <ButtonPrimary
             status="enabled"
             title="+1"
@@ -57,6 +56,8 @@ export default function Home() {
             <span>
                 <FaShoppingCart />
             </span>
+
+            <CustomProduct/>
         </div>
     )
 }
