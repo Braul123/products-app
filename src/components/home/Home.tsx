@@ -12,7 +12,6 @@ import ProductCard from '../layouts/productCard/ProductCard';
 import PaginationLayout from '../layouts/pagination/PaginationLayout';
 import SeacrhLayout from '../layouts/search/Search';
 import { Product } from '../../interface/models/interface';
-import { log } from 'console';
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -20,35 +19,28 @@ export default function Home() {
     const colors = useColors(); // Obtiene los colores principales
     const [openModal, setOpenModal] = useState(false);
     const [products, setProducts] = useState([]);
-    
+
     // PAGINADOR
     const [skip, setSkip] = useState(0);
     const limit = 4;
     const [totalPages, setTotalPages] = useState(1);
     const [page, setPage] = useState(1);
 
-    // useEffect(() => {
-    //     getProducts();
-    // },[]);
-
     useEffect(() => {
-        console.log('OBTIENE LOS PRODUCTOS', _products);
-        // setProducts(_products);
+        // Si no hay paginación obtiene los productos al inicio
         if (skip == 0) getProducts();
         else setSkip(0);
-        
         initPaginator();
     }, [_products]);
 
     useEffect(() => {
         getProducts();
-    },[skip]);
+    }, [skip]);
 
     // Inicia la data del componente
     const getProducts = () => {
         fetchGetProducts(skip, limit, _products).then((result: any) => {
-            console.log('SI LLEGA PERROOO', result);
-            setProducts(result); 
+            setProducts(result);
         }, err => {
             console.error('ERROR AGREGANDO PRODCUTO', err);
         })
@@ -77,9 +69,8 @@ export default function Home() {
 
     // Si cambia el paginador
     const changePaginator = async (page: any) => {
-        console.log('PAGINA *****', page);
         setPage(page);
-        const _skip = Math.ceil(limit*page)-limit;
+        const _skip = Math.ceil(limit * page) - limit;
         await setSkip(_skip);
     }
 
@@ -140,7 +131,9 @@ export default function Home() {
                 }
             </div>
 
-            <PaginationLayout count={totalPages} initalPage={page} onChange={(page: number) => {changePaginator(page)}} />
+            {
+               products.length > 0 && <PaginationLayout count={totalPages} initalPage={page} onChange={(page: number) => { changePaginator(page) }} />
+            }
 
             <CustomProduct open={openModal} action="create" setOpenModal={setOpenModal} />
         </div>

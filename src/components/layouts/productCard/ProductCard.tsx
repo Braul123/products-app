@@ -3,23 +3,37 @@ import './ProductCard.css';
 import notFoundImage from '../../../assets/img/Image-not-found.png';
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { Product } from '../../../interface/models/interface';
+import { MdDelete } from "react-icons/md";
+import { FaRegEdit } from "react-icons/fa";
+import { IoMdSettings } from "react-icons/io";
+import { MdEdit } from "react-icons/md";
+import CustomProduct from '../../modals/customProduct/CustomProduct';
 
 const ProductCard = (props: Product) => {
 
   const [product, setProduct] = useState<any>(null);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     setProduct(props);
-  },[props])
+  }, [props]);
 
   if (!product) {
     return null
   }
-
   return (
     <div className="product-card">
+      <div className='actionsProduct'>
+        <div className='contentAction'>
+          <button className='buttonAction'>
+            <MdDelete fontSize={16} />
+          </button>
+          <button className='buttonAction' onClick={() => setOpenModal(true)} >
+            <IoMdSettings fontSize={16}/>
+          </button>
+        </div>
+      </div>
       <div className="product-image-container">
-
         <img src={product.image ? product.image : notFoundImage} alt="" />
       </div>
       <h2 className="product-title">{product.name}</h2>
@@ -30,13 +44,14 @@ const ProductCard = (props: Product) => {
         <span className="product-price">${parseFloat(product.price)}</span>
         <button className="favorite-button">
           {
-            product.favorite ? <MdFavorite style={{fontSize: '20px', color: 'red'}}/> :
-             <MdFavoriteBorder style={{fontSize: '20px'}}/>
-            
+            product.favorite ? <MdFavorite style={{ fontSize: '20px', color: 'red' }} /> :
+              <MdFavoriteBorder style={{ fontSize: '20px' }} />
+
           }
         </button>
-
       </div>
+
+      <CustomProduct open={openModal} action="edit" setOpenModal={setOpenModal} dataProduct={product} />
 
 
     </div>

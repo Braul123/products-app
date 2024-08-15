@@ -81,3 +81,12 @@ export const useColors =() => {
         }
     }
 }
+
+/**
+ * obtiene los productos del localstorage
+ */
+export function getProductsStorage() {
+    const products: any = localStorage.getItem("products");
+    const resolve = JSON.parse(atob(products));
+    return resolve
+}

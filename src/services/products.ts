@@ -9,7 +9,7 @@ import { Product } from "../interface/models/interface";
  */
 export function fetchNewProductDefault() {
     return new Promise(async (resolve) => {
-        const uniqueid = JSON.stringify(Math.random()).slice(2,6);
+        const uniqueid = JSON.stringify(Math.random()).slice(2, 6);
         const newProduct: Product = {
             id: uniqueid,
             name: `Nuevo producto ${uniqueid}`,
@@ -29,7 +29,7 @@ export function fetchNewProductDefault() {
  */
 export function fetchSaveNewProduct(data: Product) {
     return new Promise(async (resolve) => {
-        const uniqueid = JSON.stringify(Math.random()).slice(2,6);
+        const uniqueid = JSON.stringify(Math.random()).slice(2, 6);
         const newProduct: Product = {
             id: uniqueid,
             ...data
@@ -39,13 +39,23 @@ export function fetchSaveNewProduct(data: Product) {
 }
 
 /**
+ * @function fetchEditProduct
+ * @description Edita un producto y retorna el resultado
+ */
+export function fetchEditProduct(data: Product) {
+    return new Promise(async (resolve) => {
+        resolve(data);
+    })
+}
+
+/**
  * @function fetchGetProducts
  * @description Obtiene los productos de acuerdo al paginador
  */
-export function fetchGetProducts(skip: number, limit: number, products:any ) {
+export function fetchGetProducts(skip: number, limit: number, products: any) {
     return new Promise(async (resolve) => {
         // identifica hasta que indice debe ir el paginador
-        let toIndexFilter = skip+limit;
+        let toIndexFilter = skip + limit;
         // Si es mayor a la logitud del arreglo obtiene todo
         if (toIndexFilter > products.length) {
             toIndexFilter = products.length;

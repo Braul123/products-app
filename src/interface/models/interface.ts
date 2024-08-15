@@ -42,6 +42,7 @@ export interface PropsModalProduct {
     open: boolean
     action: "create" | "edit"
     setOpenModal: any
+    dataProduct?: Product
 }
 
 /**
