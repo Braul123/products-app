@@ -8,7 +8,8 @@ export interface Product {
     price: number,
     image: any,
     id?: string,
-    category: string
+    category: string,
+    favorite: boolean
 }
 
 /**
@@ -32,4 +33,13 @@ export interface PropsButtonPrimary {
     status: 'enabled' | 'disabled',
     progress?: boolean,
     style?: any
+}
+
+/**
+ * @description Propiedades para modal de creación o edición de producto
+ */
+export interface PropsModalProduct {
+    open: boolean
+    action: "create" | "edit"
+    setOpenModal: any
 }

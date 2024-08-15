@@ -16,7 +16,8 @@ export function fetchNewProductDefault() {
             description: "Descubre la excelencia en cada detalle con nuestro innovador producto. Diseñado para satisfacer tus necesidades y elevar tu experiencia, este artículo combina calidad, funcionalidad y estilo. Fabricado con materiales de primera, garantiza durabilidad y un rendimiento excepcional. Su diseño ergonómico y moderno se adapta perfectamente a cualquier entorno, haciendo de él una opción ideal para el uso diario.",
             image: "",
             price: 200000,
-            category: "general"
+            category: "General",
+            favorite: false
         }
         resolve(newProduct);
     })

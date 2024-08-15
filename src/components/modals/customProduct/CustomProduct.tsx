@@ -1,64 +1,75 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Dialog from '@mui/material/Dialog';
-import { Button, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { Alert, Button, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import "./CustomProduct.css";
 import InputPrimary from '../../UI/InputPrimary/InputPrimary';
 import { useColors, colorsMain } from '../../../services/utils/colors';
 import { LuImagePlus } from "react-icons/lu";
 import ButtonPrimary from '../../UI/ButtonPrimary/ButtonPrimary';
-import { Product } from '../../../models/interface';
+import { Product, PropsModalProduct } from '../../../models/interface';
 import { fetchSaveNewProduct } from '../../../services/products';
 
 import { useDispatch } from 'react-redux';
 import { saveNewProduct } from '../../../interface/state/slices/productsSlice';
+
 
 /**
 * @function CustomProduct
 * @description Crea o edita un producto
 * @returns 
 */
-export default function CustomProduct() {
+export default function CustomProduct(props: PropsModalProduct) {
     // Disparador para app state
     const dispatch = useDispatch();
     // FORMULARIO
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState(10);
     const [image, setImage] = useState('');
     const [category, setCategory] = useState('');
 
     const useColorsMain = colorsMain; // Obtiene los colores principales
     const colors = useColors(); // Obtiene los colores principales
 
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false); // Administra la visivilidad de la modal
 
-    // Abre la modal
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+    useEffect(() => {
+        setOpen(props.open);
+    },[props]);
 
     // Cierra la modal
     const handleClose = () => {
         setOpen(false);
+        props.setOpenModal(false);
     };
 
     // Crea el producto
     const createProduct = () => {
-        const sendData: Product = {
-            name,
-            description,
-            price,
-            image,
-            category
+        // Valida si el formulario está completo
+        const valideForm = name && description && price && category ? true : false;
+
+        // Si el formulario es válido crea el producto
+        if (valideForm) {
+            const sendData: Product = {
+                name,
+                description,
+                price,
+                image,
+                category,
+                favorite: false
+            }
+            // Ejecuta la petición para creación de producto
+            fetchSaveNewProduct(sendData).then((result: any) => {
+                console.log('PRDUCTO CREADO');
+                dispatch(saveNewProduct(result));
+                handleClose();
+            }, err => {
+                console.error(err);
+            })
+        } else {
+            alert("Debes completar todos los campos del formulario para continuar");
         }
-        // Ejecuta la petición para creación de producto
-        fetchSaveNewProduct(sendData).then((result: any) => {
-            console.log('PRDUCTO CREADO');
-            dispatch(saveNewProduct(result));
-        }, err => {
-            console.error(err);
-        })
     }
 
     return (
@@ -121,7 +132,7 @@ export default function CustomProduct() {
                         style={{backgroundColor: 'transparent'}}
                     />
                     <ButtonPrimary
-                        title="Crear"
+                        title="Guardar"
                         status="enabled"
                         onClick={() => createProduct()}
                     />
