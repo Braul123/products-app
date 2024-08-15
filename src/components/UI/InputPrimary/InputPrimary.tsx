@@ -2,7 +2,7 @@
 import { useSelector } from 'react-redux';
 import './InputPrimary.css'
 import { useColors } from '../../../services/utils/colors';
-import { PropsInputPrimary } from '../../../models/interface';
+import { PropsInputPrimary } from '../../../interface/models/interface';
 
 /**
  * @function InputPrimary

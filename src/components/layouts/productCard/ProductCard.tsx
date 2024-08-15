@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './ProductCard.css';
 import notFoundImage from '../../../assets/img/Image-not-found.png';
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
-import { Product } from '../../../models/interface';
+import { Product } from '../../../interface/models/interface';
 
 const ProductCard = (props: Product) => {
 

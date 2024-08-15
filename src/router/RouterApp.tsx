@@ -6,8 +6,8 @@ import HomeApp from '../components/home/Home';
 export default function RouterApp() {
 
   return (
-    <Routes>
-      <Route path='/' element={<HomeApp />}></Route>
-    </Routes>
+      <Routes>
+        <Route path='/' element={<HomeApp />}></Route>
+      </Routes>
   )
 }

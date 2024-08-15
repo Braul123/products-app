@@ -3,7 +3,7 @@ import React from 'react';
 import './ButtonPrimary.css'
 import { useSelector } from 'react-redux';
 import { useColors } from '../../../services/utils/colors';
-import { PropsButtonPrimary } from '../../../models/interface';
+import { PropsButtonPrimary } from '../../../interface/models/interface';
 
 /**
  * @function ButtonPrimary

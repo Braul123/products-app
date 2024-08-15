@@ -9,19 +9,17 @@ export const productsSlice = createSlice(
         name: "productsSlice",
         initialState,
         reducers: {
-            saveAllProducts: (state, actions) => {
-                state.products = actions.payload;
-            },
+            // Guarda los prodcutos en el state de la aplicación
             saveNewProduct: (state, actions) => {
                 let products: any = state.products;
                 const _newProduct = actions.payload;
-                console.log('PRODUCTOS EN STAND');
                 products.unshift(_newProduct);
-                
+                // Guarda la data en el localstorage para mantenerla
+                localStorage.setItem("products", btoa(JSON.stringify(products)));
             }
         }
     }
 )
 
-export const { saveAllProducts, saveNewProduct } = productsSlice.actions;
+export const { saveNewProduct } = productsSlice.actions;
 export default productsSlice.reducer;

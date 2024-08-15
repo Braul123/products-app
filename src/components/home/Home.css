@@ -3,10 +3,10 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    min-height: 100%;
 }
 
-.contentList {
-    background-color: 'red';
+.contentListNotFound {
     width: 100%;
     height: 300px;
     display: flex;
@@ -46,4 +46,8 @@
     flex-direction: row;
     gap: 30px;
     flex-wrap: wrap;
+}
+
+.contentListProducts {
+    margin-top: 10px;
 }

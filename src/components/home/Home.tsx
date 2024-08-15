@@ -1,33 +1,65 @@
 import React, { useEffect, useState } from 'react';
 import './Home.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectorProductState } from '../../interface/state/selectors/selectorsAll';
-import InputPrimary from '../UI/InputPrimary/InputPrimary';
+import { selectorProductState } from '../../interface/stateApp/selectors/selectorsAll';
 import ButtonPrimary from '../UI/ButtonPrimary/ButtonPrimary';
 import { useColors } from '../../services/utils/colors';
 import { FaShoppingCart } from "react-icons/fa";
-import { fetchNewProductDefault } from '../../services/products';
-import { saveNewProduct } from '../../interface/state/slices/productsSlice';
+import { fetchGetProducts, fetchNewProductDefault } from '../../services/products';
+import { saveNewProduct } from '../../interface/stateApp/slices/productsSlice';
 import CustomProduct from '../modals/customProduct/CustomProduct';
-import Pagination from '@mui/material/Pagination';
 import ProductCard from '../layouts/productCard/ProductCard';
+import PaginationLayout from '../layouts/pagination/PaginationLayout';
+import SeacrhLayout from '../layouts/search/Search';
+import { Product } from '../../interface/models/interface';
+import { log } from 'console';
 
 export default function Home() {
     const dispatch = useDispatch();
     const _products = useSelector(selectorProductState);
     const colors = useColors(); // Obtiene los colores principales
-    const [filter, setFilter] = useState('');
     const [openModal, setOpenModal] = useState(false);
     const [products, setProducts] = useState([]);
+    
+    // PAGINADOR
+    const [skip, setSkip] = useState(0);
+    const limit = 4;
+    const [totalPages, setTotalPages] = useState(1);
+    const [page, setPage] = useState(1);
 
-    useEffect(() => {
-        console.log('CAMBIA EL FILTRO PRINCIPAL');
-    }, [filter])
+    // useEffect(() => {
+    //     getProducts();
+    // },[]);
 
     useEffect(() => {
         console.log('OBTIENE LOS PRODUCTOS', _products);
-        setProducts(_products)
+        // setProducts(_products);
+        if (skip == 0) getProducts();
+        else setSkip(0);
+        
+        initPaginator();
     }, [_products]);
+
+    useEffect(() => {
+        getProducts();
+    },[skip]);
+
+    // Inicia la data del componente
+    const getProducts = () => {
+        fetchGetProducts(skip, limit, _products).then((result: any) => {
+            console.log('SI LLEGA PERROOO', result);
+            setProducts(result); 
+        }, err => {
+            console.error('ERROR AGREGANDO PRODCUTO', err);
+        })
+    }
+
+    // Identifica los datos necesarios para armar el paginador
+    const initPaginator = () => {
+        const totalPages = Math.ceil(_products.length / limit);
+        setTotalPages(totalPages)
+        setSkip(0);
+    }
 
     // Agrega un nuevo producto
     const addNewProduct = () => {
@@ -43,10 +75,18 @@ export default function Home() {
         setOpenModal(true);
     }
 
+    // Si cambia el paginador
+    const changePaginator = async (page: any) => {
+        console.log('PAGINA *****', page);
+        setPage(page);
+        const _skip = Math.ceil(limit*page)-limit;
+        await setSkip(_skip);
+    }
+
     // Renderiza la vista cuando no hay resultados
     const renderNotFound = () => {
         return (
-            <div className='contentList'>
+            <div className='contentListNotFound'>
                 <div className='notFound'>
                     <FaShoppingCart style={{ fontSize: '100px', ...colors.colorTextSecondary }} />
                     <p className='textNotFound'
@@ -61,27 +101,24 @@ export default function Home() {
     const renderListProducts = () => {
         return (
             <div className='listProducts'>
-                  <ProductCard
-                         image=""
-                         name="Un nuevo producto con texto largo"
-                         description="Un producto"
-                         price={100000}
-                         favorite={false}
-                         category='general'
-                    />
+                {
+                    // Itera los productos para mostrarlos en la lista
+                    products.map((product: Product, index: number) => {
+                        return (
+                            <ProductCard key={`product_${product.id}`} {...product} />
+                        )
+                    })
+                }
             </div>
         )
     }
-    
 
     return (
-        <div className="layoutHome" style={{...colors.backgroundStyle}}>
-            <InputPrimary
-                setValue={setFilter}
-                value={filter}
-                placeholder="Que estas pensando?"
-            />
+        <div className="layoutHome" style={{ ...colors.backgroundStyle }}>
+            {/* Buscador general */}
+            <SeacrhLayout onReturn={(event: any) => console.log(event)} />
 
+            {/* Acciones de la cabecera */}
             <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', flexWrap: 'wrap' }}>
                 <ButtonPrimary
                     status="enabled"
@@ -94,15 +131,16 @@ export default function Home() {
                     onClick={() => { openModalAction() }} />
             </div>
 
-            <span style={{ ...colors.colorText }}>Prueba de texto</span>
 
+            {/* Listado de productos */}
+            <div className='contentListProducts'>
+                {
+                    products.length === 0 ?
+                        renderNotFound() : renderListProducts()
+                }
+            </div>
 
-            {
-                products.length === 0 ? 
-                renderNotFound() : renderListProducts()
-            }
-
-            <Pagination count={3} page={2} onChange={() => {}} color="primary" />
+            <PaginationLayout count={totalPages} initalPage={page} onChange={(page: number) => {changePaginator(page)}} />
 
             <CustomProduct open={openModal} action="create" setOpenModal={setOpenModal} />
         </div>

@@ -43,3 +43,19 @@ export interface PropsModalProduct {
     action: "create" | "edit"
     setOpenModal: any
 }
+
+/**
+ * Propiedades para el buscador general
+ */
+export interface PropsSearch {
+    onReturn: any
+}
+
+/**
+ * @description Propiedades para el paginador
+ */
+export interface PropsPagintaion {
+    count: number
+    initalPage: number
+    onChange: any
+}

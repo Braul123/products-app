@@ -1,3 +1,20 @@
+
+.containerApp {
+  height: 100vh;
+  min-height: 100vh;
+  max-width: 100vw;
+  width: 100vw;
+}
+
+
+@media (min-width: 1500px) {
+  .containerApp {
+     padding-left: 15%; 
+      padding-right: 15%
+  }
+}
+
+
 .App {
   text-align: center;
 }

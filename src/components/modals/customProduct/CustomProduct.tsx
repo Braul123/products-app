@@ -7,11 +7,11 @@ import InputPrimary from '../../UI/InputPrimary/InputPrimary';
 import { useColors, colorsMain } from '../../../services/utils/colors';
 import { LuImagePlus } from "react-icons/lu";
 import ButtonPrimary from '../../UI/ButtonPrimary/ButtonPrimary';
-import { Product, PropsModalProduct } from '../../../models/interface';
+import { Product, PropsModalProduct } from '../../../interface/models/interface';
 import { fetchSaveNewProduct } from '../../../services/products';
 
 import { useDispatch } from 'react-redux';
-import { saveNewProduct } from '../../../interface/state/slices/productsSlice';
+import { saveNewProduct } from '../../../interface/stateApp/slices/productsSlice';
 
 
 /**

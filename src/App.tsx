@@ -10,7 +10,7 @@ export default function App() {
   const colors = useColors(); // Obtiene los colores principales
   
   return (
-    <div style={{...colors.backgroundStyle, minHeight: '100vh', height: '100vh'}}>
+    <div className='containerApp' style={{...colors.backgroundStyle}}>
       <BrowserRouter>
         <RouterApp />
       </BrowserRouter>
