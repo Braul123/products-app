@@ -60,3 +60,14 @@ export interface PropsPagintaion {
     initalPage: number
     onChange: any
 }
+
+/**
+ * @description Propiedades para la modal de confirmacion 
+ */
+export interface PropsModalConfirmation  {
+    open: boolean
+    title: string
+    description: string
+    setOpenModal: any
+    pressConfirmation: any
+}

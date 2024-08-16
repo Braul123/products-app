@@ -134,7 +134,7 @@ export default function CustomProduct(props: PropsModalProduct) {
 
     return (
         <div>
-            <Dialog open={open} onClose={handleClose} >
+            <Dialog open={open} onClose={handleClose}>
 
                 <DialogTitle className={"titleModal"}>
                     {props.action === "create" ? "Crear producto" : "Editar producto"}

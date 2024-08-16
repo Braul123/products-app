@@ -17,7 +17,7 @@ export default function Home() {
     const dispatch = useDispatch();
     const _products = useSelector(selectorProductState);
     const colors = useColors(); // Obtiene los colores principales
-    const [openModal, setOpenModal] = useState(false);
+    const [openModal, setOpenModal] = useState(false); // Para la modal - crear/editar producto
     const [products, setProducts] = useState([]);
 
     // PAGINADOR
@@ -136,6 +136,7 @@ export default function Home() {
             }
 
             <CustomProduct open={openModal} action="create" setOpenModal={setOpenModal} />
+            
         </div>
     )
 }

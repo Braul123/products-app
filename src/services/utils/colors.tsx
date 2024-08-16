@@ -87,6 +87,10 @@ export const useColors =() => {
  */
 export function getProductsStorage() {
     const products: any = localStorage.getItem("products");
-    const resolve = JSON.parse(atob(products));
-    return resolve
+    if (products) {
+        const resolve = JSON.parse(atob(products));
+        return resolve
+    } else {
+        return []
+    }
 }
