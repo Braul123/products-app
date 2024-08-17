@@ -3,9 +3,10 @@ import './App.css';
 
 import { BrowserRouter } from 'react-router-dom';
 import RouterApp from './router/RouterApp';
-import { getProductsStorage, useColors } from './services/utils/colors';
+import { useColors } from './services/utils/colors';
 import { useDispatch } from 'react-redux';
 import { setAllProducts } from './interface/stateApp/slices/productsSlice';
+import { getProductsStorage } from './services/utils/utils';
 
 export default function App() {
   const dispatch = useDispatch();

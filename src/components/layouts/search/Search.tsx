@@ -15,27 +15,20 @@ export default function SeacrhLayout(props: PropsSearch) {
 
   // Si se deja de escribir en 500msg ejecuta el get de productos
   const handleChange = () => {
-    if (filter) {
-      // Limpiar el timeout previo
-      if (typingTimeout) {
-        clearTimeout(typingTimeout);
-      }
-  
-      // Iniciar un nuevo timeout de 2 segundos
-      setTypingTimeout(
-        setTimeout(() => {
-          props.onReturn('Devuelve data');
-        }, 500)
-      );
+    // Limpiar el timeout previo
+    if (typingTimeout) {
+      clearTimeout(typingTimeout);
     }
+
+    // Iniciar un nuevo timeout de 2 segundos
+    setTypingTimeout(
+      setTimeout(() => {
+        props.onReturn(filter);
+      }, 500)
+    );
   };
 
 
-  // Detecta cambios en el campo de búsqueda
-  useEffect(() => {
-    console.log('CAMBIA EL FILTRO PRINCIPAL');
-  }, [filter]);
-  
   return (
     <div>
       <InputPrimary

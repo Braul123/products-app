@@ -1,5 +1,7 @@
 
 import { Product } from "../interface/models/interface";
+import { getProductsStorage } from "./utils/utils";
+
 
 /**
  * @function fetchNewProductDefault
@@ -52,16 +54,28 @@ export function fetchEditProduct(data: Product) {
  * @function fetchGetProducts
  * @description Obtiene los productos de acuerdo al paginador
  */
-export function fetchGetProducts(skip: number, limit: number, products: any) {
+export function fetchGetProducts(skip: number, limit: number, search: any) {
     return new Promise(async (resolve) => {
-        // identifica hasta que indice debe ir el paginador
-        let toIndexFilter = skip + limit;
-        // Si es mayor a la logitud del arreglo obtiene todo
-        if (toIndexFilter > products.length) {
-            toIndexFilter = products.length;
+        const products: any[] = await getProductsStorage();
+        let temporalData = products;
+        console.log('ESTOS SON LOS PRODUCTOS ENCONTREADOS', search, products);
+
+        if (search) {
+            const searchGet = products.filter(
+                (prod: any) =>
+                    prod.name.toLowerCase().includes(search) ||
+                    prod.category.toLowerCase().includes(search));
+            resolve(searchGet);
+        } else {
+            // identifica hasta que indice debe ir el paginador
+            let toIndexFilter = skip + limit;
+            // Si es mayor a la logitud del arreglo obtiene todo
+            if (toIndexFilter > temporalData.length) {
+                toIndexFilter = temporalData.length;
+            }
+            // Obtiene dos datos
+            const filter = temporalData.slice(skip, toIndexFilter);
+            resolve(filter);
         }
-        // Obtiene dos datos
-        const filter = products.slice(skip, toIndexFilter);
-        resolve(filter);
     })
 }

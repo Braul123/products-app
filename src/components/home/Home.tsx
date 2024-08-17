@@ -26,6 +26,9 @@ export default function Home() {
     const [totalPages, setTotalPages] = useState(1);
     const [page, setPage] = useState(1);
 
+    // FILTRO
+    const [filter, setFilter] = useState('');
+
     useEffect(() => {
         // Si no hay paginación obtiene los productos al inicio
         if (skip == 0) getProducts();
@@ -35,11 +38,18 @@ export default function Home() {
 
     useEffect(() => {
         getProducts();
+    },[filter])
+
+    useEffect(() => {
+        getProducts();
     }, [skip]);
 
     // Inicia la data del componente
     const getProducts = () => {
-        fetchGetProducts(skip, limit, _products).then((result: any) => {
+        console.log('AQUI FILTER', filter);
+        
+        const _search = filter;
+        fetchGetProducts(skip, limit, _search).then((result: any) => {
             setProducts(result);
         }, err => {
             console.error('ERROR AGREGANDO PRODCUTO', err);
@@ -60,6 +70,11 @@ export default function Home() {
         }, err => {
             console.error('ERROR AGREGANDO PRODCUTO', err);
         })
+    }
+
+    // Busca productos por nombre o categoria
+    const searchData = async (filter: any) => {
+        setFilter(filter);
     }
 
     // Abre la modal
@@ -107,7 +122,7 @@ export default function Home() {
     return (
         <div className="layoutHome" style={{ ...colors.backgroundStyle }}>
             {/* Buscador general */}
-            <SeacrhLayout onReturn={(event: any) => console.log(event)} />
+            <SeacrhLayout onReturn={(event: any) => searchData(event)} />
 
             {/* Acciones de la cabecera */}
             <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', flexWrap: 'wrap' }}>
@@ -132,7 +147,7 @@ export default function Home() {
             </div>
 
             {
-               products.length > 0 && <PaginationLayout count={totalPages} initalPage={page} onChange={(page: number) => { changePaginator(page) }} />
+               products.length > 0 && !filter && <PaginationLayout count={totalPages} initalPage={page} onChange={(page: number) => { changePaginator(page) }} />
             }
 
             <CustomProduct open={openModal} action="create" setOpenModal={setOpenModal} />
