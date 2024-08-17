@@ -28,7 +28,6 @@ export default function SeacrhLayout(props: PropsSearch) {
     );
   };
 
-
   return (
     <div>
       <InputPrimary

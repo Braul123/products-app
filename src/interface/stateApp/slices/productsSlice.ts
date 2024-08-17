@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { log } from 'console';
 
 const initialState = {
     products: []
@@ -36,7 +35,6 @@ export const productsSlice = createSlice(
             },
             deleteProduct: (state, actions) => {
                 const actualProducts: any = state.products;
-                console.log('SON LOS PRODUCTOS', actualProducts.length);
                 
                 let _products: any = [];
                 const _deletedProduct = actions.payload;

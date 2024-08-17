@@ -45,9 +45,7 @@ export default function Home() {
     }, [skip]);
 
     // Inicia la data del componente
-    const getProducts = () => {
-        console.log('AQUI FILTER', filter);
-        
+    const getProducts = () => {        
         const _search = filter;
         fetchGetProducts(skip, limit, _search).then((result: any) => {
             setProducts(result);

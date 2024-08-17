@@ -1,46 +1,52 @@
-# Getting Started with Create React App
+# Gestor de tareas de usuario
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Esta aplicación busca gestionar productos de un usuario permitiendole eliminar y editar datos.
+La estructura con la que se diseñó se basa en componentes reutilizables en cualquer parte de la aplicación, lo que nos permite tener un mejor rendimiento al momento de renderizar el DOM. 
+* Para los iconos se ha usaso react-icons
+* Además de ha incluido material UI para los botones y las modales. Esto con el fin de facilitar el desarrollo y agilizar los requerimientos.
 
-## Available Scripts
+# Distribución del proyecto
 
-In the project directory, you can run:
+```Bash
+    assets - Incluye todos los recursos de la aplicacón
 
-### `yarn start`
+    components - Almacena los componentes, layouts y modales de la aplicación, asi como las interfaces de usuario como botones y campos de formulario
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    interface - Administra el modelo de datos y la gestion de estado de la aplicación
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+    router - Enrutamiento general
 
-### `yarn test`
+    servicios - Almacena los servicios de la aplicación y gestiona las peticiones http
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
 
-### `yarn build`
+# Iniciando el proyecto
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Debe asegurarse de que las versiones locales de node y yarn esten mínimo en las siguientes versiones: 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```Bash
+$ node -v
+v20.11.0
+$ yarn -v
+1.22.22
+```
+# Clonar repositorio e instalar dependencias
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+El proyecto fue desarrollado con el gestor de paquetes *yarn* por lo que se debe ejecutar el comando de instalación 
 
-### `yarn eject`
+```Bash
+$ yarn install
+```
+ o
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+ ```Bash
+$ npm install
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Lanzamineto de servidor local
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Para ejecutar un servidor local y compilar el proyecto se debe ejecutar 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```Bash
+$ yarn start
+```

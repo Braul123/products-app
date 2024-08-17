@@ -58,8 +58,6 @@ export function fetchGetProducts(skip: number, limit: number, search: any) {
     return new Promise(async (resolve) => {
         const products: any[] = await getProductsStorage();
         let temporalData = products;
-        console.log('ESTOS SON LOS PRODUCTOS ENCONTREADOS', search, products);
-
         if (search) {
             const searchGet = products.filter(
                 (prod: any) =>

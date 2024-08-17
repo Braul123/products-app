@@ -22,9 +22,7 @@ const ProductCard = (props: Product) => {
   }, [props]);
 
   // Elimina el producto de la colección
-  const actionDeleteProduct = () => {
-    console.log('ESTE ES EL ID DEL PRODUCTO', product);
-    
+  const actionDeleteProduct = () => {    
     dispatch(deleteProduct(product));
   }
 

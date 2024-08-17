@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
 import { PropsModalConfirmation } from '../../../interface/models/interface';
 import './ModalConfirmation.css'
 import ButtonPrimary from '../../UI/ButtonPrimary/ButtonPrimary';
